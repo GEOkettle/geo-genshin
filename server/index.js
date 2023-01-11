@@ -17,11 +17,14 @@ import {
 
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.use(express.urlencoded( {extended : false } ));// bodyparser
 app.use(express.json()); // bodyparser
 app.use(cookieParser());
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({ origin: "geo-genshin.exciting-chantalle.koyeb", credentials: true })
+);
 app.listen(port, () => {
   console.log("server runs at 5000");
 });
