@@ -80,7 +80,7 @@ app.post("/main", (req, res) => {
         )
         .then((res) => res.data.data);
 
-   
+
 
       let notePrimoRewards = [];
       let i = 1;
@@ -90,9 +90,10 @@ app.post("/main", (req, res) => {
             `https://hk4e-api-os.mihoyo.com/event/ysledgeros/month_detail?month=${currentMonth}&current_page=${i}&type=1&region=${server}&uid=${gameRoleId}&lang=ko-kr`
           )
           .then((res) => res.data.data?.list)
-
+        if (!detailPrimoNote) break;
         if (!detailPrimoNote.length) break;
         notePrimoRewards.push(detailPrimoNote);
+      
         i++;
       }
       notePrimoRewards = notePrimoRewards.flat();
@@ -106,11 +107,14 @@ app.post("/main", (req, res) => {
     while (true) {
       const detailMoraNote = await dataMachine
         .get(
-          `https://hk4e-api-os.mihoyo.com/event/ysledgeros/month_detail?month=1&current_page=${j}&type=2&region=${server}&uid=${gameRoleId}&lang=ko-kr`
+          `https://hk4e-api-os.mihoyo.com/event/ysledgeros/month_detail?month=${currentMonth}&current_page=${j}&type=2&region=${server}&uid=${gameRoleId}&lang=ko-kr`
         )
-        .then((res) => res.data.data?.list)
+        .then((res) => res.data.data?.list);
+      if (!detailMoraNote) break;
       if (!detailMoraNote.length) break;
+
       noteMoraRewards.push(detailMoraNote);
+
       j++;
     }
     noteMoraRewards = noteMoraRewards.flat();

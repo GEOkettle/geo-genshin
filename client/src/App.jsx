@@ -1,8 +1,12 @@
 import { useEffect,useState } from 'react';
 import './App.css'
+import SideBar from './components/SideBar';
+import MainFrame from './components/MainFrame';
+import useStore from './store/store';
 
 function App() {
-  const [userInfo, setUserInfo] = useState([])
+
+  const { characters,setCharacters}=useStore()
   const getData = async () => {
     const res = await fetch(
       "http://localhost:5000/main",{
@@ -10,23 +14,26 @@ function App() {
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({ uid: '87654321' })
     }).then(res => { return res.json() })
-      .then(res => {
-        console.log(res)
-        setUserInfo(...userInfo,[res])
-      })
-    
+
+    setCharacters(res.character.avatars)
+
   }
-  
+
   useEffect(() => {
     getData();
 
   }, [])
 
   return (
-    <div className="App">
-      { JSON.stringify(userInfo)}
-    </div>
+      <>
+      <SideBar />
+      <MainFrame/>
+
+    </>
+  
   )
 }
 
 export default App
+
+
