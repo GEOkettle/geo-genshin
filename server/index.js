@@ -2,6 +2,7 @@ import axios from 'axios';
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
+import dotenv from "dotenv";
 import {
   parseCookie,
   getUuid,
@@ -14,20 +15,57 @@ import {
 //https://arca.live/b/genshin/37171743
 //https://www.npmjs.com/package/@mihoyo-kit/genshin-api
 // https://act.hoyolab.com/ys/event/e20210923journal/index.html#/
-
-
+dotenv.config();
+const {
+  MODE,
+  PORT,
+  CORS_ORIGIN_DEV,
+  CORS_ORIGIN_PROD1,
+  CORS_ORIGIN_PROD2,
+  BASIC_UID,
+  LTOKEN,
+  CTOKEN,
+  ACCID,
+} = process.env;
 const app = express();
-const port = process.env.PORT || 5000;
+const port = PORT || 5000
+console.log(PORT)
+console.log(port)
 app.use(express.urlencoded( {extended : false } ));// bodyparser
 app.use(express.json()); // bodyparser
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
-app.use(
-  cors({ origin: "geo-genshin.exciting-chantalle.koyeb", credentials: true })
-);
+// local
+// app.use(cors({ origin:[${CORS_ORIGIN}], credentials: true }));
+//prod
+if (MODE === "development") {
+  
+  app.use(
+    cors({
+      origin: [`${CORS_ORIGIN_DEV}`],
+      credentials: true,
+    })
+  );
+} else if (MODE === "production") { 
+  app.use(
+    cors({
+      origin: [`${CORS_ORIGIN_PROD1}`, `${CORS_ORIGIN_PROD2}`],
+      credentials: true,
+    })
+  );
+
+}
+
+
+
+
+
 app.listen(port, () => {
-  console.log("server runs at 5000");
+  console.log(`server running at ${port}`);
 });
+
+app.get('/hello', (req, res) => { 
+  res.send("hello world")
+})
 
 app.post("/main", (req, res) => {
   //처음에 접속해서 스켈레톤 보여주고
@@ -36,13 +74,13 @@ app.post("/main", (req, res) => {
   //다음탭은 통계 (2화면)
   console.log(req.body)
   let gottendID;
-  const ltuid = gottendID || 165181087;
+  const ltuid = gottendID || BASIC_UID;
   
   (async () => {
       //ltuid와 accountid는 클라이언트에서 받은 통행증아이디로 대체할 수 있게
       //ltuid => 조회당하는 계정 accountid => 조회하는계정
       //cookie_token은 로그인한 내계정으로 설정되있는데 이게 기간이 하루짜리라서 다른사람이 계속 내어플로 조회하고싶으면 하루한번 호요랩들어가서 로그인해줘서 토큰을 연장시켜 줘야됨.
-      const cookie = `_MHYUUID=${getUuid()}; G_ENABLED_IDPS=google; _ga=GA1.2.945851836.1668241513; _gid=GA1.2.617282950.1673273808; ltoken=G5acZwBleY5LzVA69MhAV48QjdBsoxYf22S3nyWV; ltuid=${ltuid}; cookie_token=1a0lvyJ9fLuY6DeExuCq58nyJMZfwmf5dHys84ly; account_id=165181087; mi18nLang=ko-kr;`;
+      const cookie = `_MHYUUID=${getUuid()}; G_ENABLED_IDPS=google; _ga=GA1.2.945851836.1668241513; _gid=GA1.2.617282950.1673273808; ltoken=${LTOKEN}; ltuid=${ltuid}; cookie_token=${CTOKEN}; account_id=${ACCID}; mi18nLang=ko-kr;`;
       // const cookie = `_MHYUUID=${getUuid()}; G_ENABLED_IDPS=google; _ga=GA1.2.945851836.1668241513; _gid=GA1.2.617282950.1673273808; ltoken=G5acZwBleY5LzVA69MhAV48QjdBsoxYf22S3nyWV; ltuid=173436652; cookie_token=1a0lvyJ9fLuY6DeExuCq58nyJMZfwmf5dHys84ly;   account_id=165181087; mi18nLang=ko-kr;`;
       const dataMachine = axios.create({
         headers: {
@@ -144,6 +182,14 @@ app.post("/main", (req, res) => {
     
       // console.log(character);
       // console.log(character.avatars.find(c => c.name === '베넷').weapon);
+    const OBJ = {
+      user: result,
+      profile: profile,
+      character: character,
+      mora: noteMoraRewards,
+      primo: notePrimoRewards,
+    };
+    console.log(OBJ)
       res.send({
         user: result,
         profile: profile,

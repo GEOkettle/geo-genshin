@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
-import useStore from '../store/store'
+import useStore from '../store/store.jsx'
 import styled from 'styled-components'
-import sortingLogo from '../assets/sortingLogo.svg'
+
 
 function CharacterCard() { 
   const { characters, setCharacters } = useStore()
@@ -93,6 +93,7 @@ function CharacterCard() {
         <div>
 
         <select onChange={(e) => getSorting(e)} value={sorting}>
+          <option value="">======</option>
           <option value="constellation">돌파순</option>
           <option value="fetter">호감도순</option>
           <option value="level">레벨순</option>
@@ -126,7 +127,6 @@ function Characters() {
     </div>
   )
 }
-
 export default Characters
 
 const CharacterPannel = styled.div`

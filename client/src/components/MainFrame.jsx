@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Characters from './Characters'
-import Statistics from './Statistics'
-import useStore from '../store/store'
-import wallpaper from '../assets/wallpaper.jpg'
+import Characters from './Characters.jsx'
+import Statistics from './Statistics.jsx'
+import useStore from '../store/store.jsx'
+
 const viewPage = {
   char: <Characters />,
   stat:<Statistics/>
@@ -29,5 +29,5 @@ const Mainframe = styled.div`
     bottom: 0;
     right: 0;
     background-color:#2A2A2A;
-    /* background-color: ; */
+
 `
