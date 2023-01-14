@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
 
 function Statistics() {
+ 
   return (
-    <div>dfadsfsdafsdafsdafsadfsdavxczvzxcvxzcvzxcvxczvzxcvzcx</div>
+    <div id="c"></div>
   )
 }
 

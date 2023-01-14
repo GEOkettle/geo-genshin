@@ -1,7 +1,7 @@
 import axios from 'axios';
 import express from 'express'
 import cors from 'cors'
-import cookieParser from 'cookie-parser';
+
 import dotenv from "dotenv";
 import {
   parseCookie,
@@ -33,7 +33,6 @@ console.log(PORT)
 console.log(port)
 app.use(express.urlencoded( {extended : false } ));// bodyparser
 app.use(express.json()); // bodyparser
-app.use(cookieParser());
 // local
 // app.use(cors({ origin:[${CORS_ORIGIN}], credentials: true }));
 //prod
@@ -63,9 +62,6 @@ app.listen(port, () => {
   console.log(`server running at ${port}`);
 });
 
-app.get('/hello', (req, res) => { 
-  res.send("hello world")
-})
 
 app.post("/main", (req, res) => {
   //처음에 접속해서 스켈레톤 보여주고

@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Jua:400');
 html,body {
 scroll-behavior: smooth;
 height: 100%;
 margin: 0;
 padding: 0;
 text-align: center;
+}
+body::-webkit-scrollbar{
+  display: none;
+}
+
+.mainFrame::-webkit-scrollbar{
+  display: none;
+
 }
