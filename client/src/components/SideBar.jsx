@@ -12,7 +12,7 @@ function SideBar() {
   return (
     <Sidebar style={{backgroundColor:currentElement==='none'?"rgba(0,0,0,0.7)":"rgba(0,0,0,0.1)"}}>
       <ul>
-        <li  onClick={()=>setView('char')}>캐릭현황</li>
+        <li onClick={()=>setView('char')}>캐릭현황</li>
         <li onClick={()=>setView('stat')}>통계</li>
         <li></li>
       </ul>
@@ -51,8 +51,6 @@ const Sidebar = styled.div`
                 color:${props => props.theme.color};
                 text-decoration: none !important;
                 font-weight : 600;
-               
-            
             }
         }
         }

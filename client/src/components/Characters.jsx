@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react'
 import useStore from '../store/store.jsx'
 import styled from 'styled-components'
 import NameCard from './NameCard.jsx'
-
+import Arrow from '../assets/arrow.svg'
 
 function CharacterCard() { 
   const { characters, setCharacters,setStatus,setSpecificChar,setCurrentElement } = useStore()
@@ -108,14 +108,14 @@ function CharacterCard() {
           {/* <option value="name">이름순</option> */}
           </StyledSelect>
           {/* <img src={ sortingLogo } alt="" /> */}
-          <button onClick={() => { reverseSorting()}}>↑↓</button>
+          <ArrowImg src={Arrow} onClick={() => { reverseSorting() }}/>
         </div>
       </div>
       <br />
       {charObj.map(ch => (
         <div onClick={()=>setView('spch',ch)}  key={ ch.name}>
 
-        <Card style={{ background:ch.rarity===4 ? "rgba(0,0,0,0.6)":"#9e7e1367",color: pickColor(ch.element),border:ch.rarity===4?"2px solid"+ pickColor(ch.element):"1px solid"+ pickColor(ch.element), boxShadow:ch.rarity===4 ? "" :goldEffect(ch.rarity)+pickColor(ch.element)}} >
+        <Card style={{ background:ch.rarity===4 ? "rgba(0,0,0,0.6)":"#c3804555",color: pickColor(ch.element),border:ch.rarity===4?"2px solid"+ pickColor(ch.element):"1px solid"+ pickColor(ch.element), boxShadow:ch.rarity===4 ? "" :goldEffect(ch.rarity)+pickColor(ch.element)}} >
           <div style={{height:"30px" }}>
               <Constellation style={{ border: '2px solid' + pickColor(ch.element) }}>{ch.actived_constellation_num}</Constellation>
             <Level>Lv.{ch.level}</Level>
@@ -189,8 +189,9 @@ const Level =styled.div`
 `
 const StyledSelect = styled.select`
   font-family: 'Jua', sans-serif; 
-    width:250px;
+    width:200px;
     height:50px;
+    margin: 0 10px 0 0;
     background-color: rgba(255,255,255,0.2);
     color:white;
     border:1px solid white;
@@ -205,4 +206,8 @@ const StyledSelect = styled.select`
     border-radius:50%;
     /* font-size:1.2rem; */
   }
+`
+const ArrowImg = styled.img`
+  position:relative;
+  top: 20px;
 `

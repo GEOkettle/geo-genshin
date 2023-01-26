@@ -18,7 +18,11 @@ const store = (set) => ({
   stats: [],
   setStats: (stats) => set(state => ({...state,stats})),
   specificChar: [],
-  setSpecificChar: (specificChar) => set(state => ({...state,specificChar}))
+  setSpecificChar: (specificChar) => set(state => ({ ...state, specificChar })),
+  worldExp: [],
+  setWorldExp: (worldExp) => set(state => ({ ...state, worldExp })),
+  weaponDetail: [],
+  setWeaponDetail: (weaponDetail) => set(state => ({...state,weaponDetail}))
 })
 
 const useStore = create(

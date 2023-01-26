@@ -4,22 +4,19 @@ import SideBar from './components/SideBar.jsx';
 import MainFrame from './components/MainFrame.jsx';
 import LandingPage from './components/LandingPage.jsx';
 import useStore from './store/store.jsx';
-import CharacterInfo from './components/CharacterInfo.jsx';
+import CharacterInfo from './components/CharacterInfo';
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Stars, Cloud, Sparkles } from '@react-three/drei';
 
  
 function App() {
 
-  const { setCharacters,setUserInfo,currentElement,setStats,setIsLoading,isLoading } = useStore()
+  const { setCharacters,setUserInfo,currentElement,setStats,setIsLoading,isLoading,setWorldExp } = useStore()
   
   //prod
-
-
-//dev
   // const getData = async () => {
   //   const res = await fetch(
-  //     "http://localhost:5000/main", {
+  //     "http://3.144.80.94:5000/main", {
   //   mode: 'cors',credentials:'include',
   //   method: 'POST',
   //   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json',    'Access-Control-Allow-Origin':'http://3.144.80.94'},
@@ -32,7 +29,28 @@ function App() {
   //     }
   //   )
   //   .then(()=>setIsLoading(false))
+    
   // }
+
+//dev
+  const getData = async () => {
+    const res = await fetch(
+      "http://localhost:5000/main", {
+    mode: 'cors',credentials:'include',
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json',  'Access-Control-Allow-Origin':'http://localhost'},
+    body: JSON.stringify({ uid: '87654321' })
+    }).then(res => {  return res.json() })
+      .then((res) => {
+        setCharacters(res.character.avatars)
+        setUserInfo(res.user)
+        setStats(res.profile)
+        setWorldExp(res.profile.world_explorations)
+        console.log(res)
+      }
+    )
+    .then(()=>setIsLoading(false))
+  }
 
 
   useEffect(() => {

@@ -4,8 +4,6 @@ import useStore from '../store/store'
 function NameCard() {
   const { characters,userInfo,stats } = useStore()
   const traveler = characters.find(c => c.name === "여행자");
-  console.log(stats)
-  // console.log(chestNumber)
 
   let chestNumber =  stats.stats ? stats.stats.common_chest_number + stats.stats.exquisite_chest_number + stats.stats.luxurious_chest_number + stats.stats.precious_chest_number + stats.stats.magic_chest_number : 0;
   let culusNumber =  stats.stats ? stats.stats.anemoculus_number + stats.stats.dendroculus_number + stats.stats.electroculus_number + stats.stats.geoculus_number : 0 ;
@@ -104,6 +102,7 @@ const CircleImg = styled.img`
 `
 const Namecard = styled.div`
 
+
   height:40%;
   width:100%;
   background-color:rgba(0,0,0,0.7);
@@ -116,14 +115,16 @@ const Namecard = styled.div`
   'header header header header header header header header header'
   'menu main main main main main main main main';
   gap:15px;
+  div::-webkit-scrollbar{display:none;}
   div{
     border:2px solid white;
     border-radius:15px;
     text-align: center;
 
+    overflow:scroll
     }
   .title{grid-area:header;height:60px; font-size:2.5rem;  }
   .user{grid-area:menu; height:250px;  }
-  .stat{grid-area:main;height:250px; display:flex; flex-direction:row; table{font-size:1.2rem;} }
+  .stat{grid-area:main;height:250px; display:flex; flex-direction:row; table{font-size:1.2rem;}  }
 `
 

@@ -46,11 +46,10 @@ const Mainframe = styled.div`
   overflow-y:scroll;
     height: 100%;
     width:70%;
-     position:absolute;
-
+    position:absolute;
     bottom: 0;
     right: 10%;
-
+  font-family: 'Jua', sans-serif; 
     /* background-color:black; */
 `
 
