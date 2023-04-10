@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import Paimon from '../assets/Paimon.png'
 
 
-function LandingPage() {
+function LoadingPage() {
  
   return (
-    <Landingpage>
+    <Loadingpage>
      
       <div>
 
@@ -14,13 +14,13 @@ function LandingPage() {
       <h2>Loading...</h2>
     <h1>not sure about "save", but tech otaku can change the world certainly</h1>
       </div>
-    </Landingpage>
+    </Loadingpage>
   )
 }
 
-export default LandingPage
+export default LoadingPage
 
-const Landingpage = styled.div`
+const Loadingpage = styled.div`
   height:100vh;
   width:100vw;
   position:relative;

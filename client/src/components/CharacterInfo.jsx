@@ -34,7 +34,7 @@ const barColor = {
 }
 function CharacterInfo() {
 
-const { specificChar,setSpecificChar,weaponDetail,setWeaponDetail } = useStore()
+const { specificChar,setSpecificChar,weaponDetail,setWeaponDetail,userId } = useStore()
 const [settingCheck, setSettingCheck] = useState(['5개의 성유물을 모두장착해야 세트검사가 가능합니다.', '세트효과 적용을 받고있지 않습니다.']);
 const artiObject = specificChar.reliquaries;  
 const weaponName = specificChar.weapon.name
@@ -47,7 +47,7 @@ const res = await fetch(
 mode: 'cors',credentials:'include',
 method: 'POST',
 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json',    'Access-Control-Allow-Origin':'http://localhost:5000'},
-body: JSON.stringify({ uid: '87654321',weaponName:weaponName })
+body: JSON.stringify({ uid: userId,weaponName:weaponName })
 }).then(res => {  return res.json() })
   .then((res) => {
     console.log(JSON.parse(res.weaponDetail.modules[0].components[0].data).list)
@@ -59,9 +59,11 @@ body: JSON.stringify({ uid: '87654321',weaponName:weaponName })
 // const res = await fetch(
 // "http://3.144.80.94:5000/weapon", {
 // mode: 'cors',credentials:'include',
+  
+  
 // method: 'POST',
 // headers: { 'Accept': 'application/json', 'Content-Type': 'application/json',    'Access-Control-Allow-Origin':'http://3.144.80.94'},
-// body: JSON.stringify({ uid: '87654321',weaponName:weaponName })
+// body: JSON.stringify({ uid: userId,weaponName:weaponName })
 // }).then(res => {  return res.json() })
 //   .then((res) => {
 //     console.log(JSON.parse(res.weaponDetail.modules[0].components[0].data).list)

@@ -4,6 +4,8 @@ import { devtools } from 'zustand/middleware'
 const store = (set) => ({
   isLoading: true,
   setIsLoading : (isLoading) => set(state => ({...state, isLoading})),
+  userId: "",
+  setUserId : (userId) => set(state => ({...state, userId})),
   status: "char",
   setStatus: (status) => set(state => ({ ...state, status })),
   
